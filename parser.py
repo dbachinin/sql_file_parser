@@ -3,6 +3,9 @@
 
 import re, os, sys, json
 file = sys.argv[1]
+outputfile = False
+if len(sys.argv) > 2 :
+    outputfile = sys.argv[2]
 data = []
 
 for line in open(file):
@@ -39,7 +42,9 @@ def get_ids(name):
 out = {}
 for name in names:
     out.update(get_ids(name))
-os.remove('/tmp/tmp')
-with open('/tmp/tmp.json', 'w') as f:
-    json.dump(out, f)
+if outputfile:
+    with open(outputfile, 'w') as f:
+        json.dump(out, f)
+else:
+    print out
 
